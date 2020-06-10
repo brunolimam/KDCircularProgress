@@ -11,7 +11,6 @@ import UIKit
     case forward, reverse, constant, noGlow
 }
 
-@IBDesignable
 @objcMembers
 public class KDCircularProgress: UIView, CAAnimationDelegate {
     private var progressLayer: KDCircularProgressViewLayer {
@@ -31,14 +30,14 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         set { angle = newValue.clamp(lowerBound: 0.0, upperBound: 1.0) * 360.0 }
     }
     
-    @IBInspectable public var angle: Double = 0.0 {
+    public var angle: Double = 0.0 {
         didSet {
             pauseIfAnimating()
             progressLayer.angle = angle
         }
     }
     
-    @IBInspectable public var startAngle: Double = 0.0 {
+    public var startAngle: Double = 0.0 {
         didSet {
             startAngle = startAngle.mod(between: 0.0, and: 360.0, byIncrementing: 360.0)
             progressLayer.startAngle = startAngle
@@ -46,32 +45,32 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
-    @IBInspectable public var clockwise: Bool = true {
+    public var clockwise: Bool = true {
         didSet {
             progressLayer.clockwise = clockwise
             progressLayer.setNeedsDisplay()
         }
     }
     
-    @IBInspectable public var roundedCorners: Bool = true {
+    public var roundedCorners: Bool = true {
         didSet {
             progressLayer.roundedCorners = roundedCorners
         }
     }
     
-    @IBInspectable public var lerpColorMode: Bool = false {
+    public var lerpColorMode: Bool = false {
         didSet {
             progressLayer.lerpColorMode = lerpColorMode
         }
     }
     
-    @IBInspectable public var gradientRotateSpeed: CGFloat = 0.0 {
+    public var gradientRotateSpeed: CGFloat = 0.0 {
         didSet {
             progressLayer.gradientRotateSpeed = gradientRotateSpeed
         }
     }
     
-    @IBInspectable public var glowAmount: CGFloat = 1.0 {
+    public var glowAmount: CGFloat = 1.0 {
         didSet {
             glowAmount = glowAmount.clamp(lowerBound: 0.0, upperBound: 1.0)
             progressLayer.glowAmount = glowAmount
@@ -84,28 +83,28 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
-    @IBInspectable public var progressThickness: CGFloat = 0.4 {
+    public var progressThickness: CGFloat = 0.4 {
         didSet {
             progressThickness = progressThickness.clamp(lowerBound: 0.0, upperBound: 1.0)
             progressLayer.progressThickness = progressThickness / 2.0
         }
     }
     
-    @IBInspectable public var trackThickness: CGFloat = 0.5 {//Between 0 and 1
+    public var trackThickness: CGFloat = 0.5 {//Between 0 and 1
         didSet {
             trackThickness = trackThickness.clamp(lowerBound: 0.0, upperBound: 1.0)
             progressLayer.trackThickness = trackThickness / 2.0
         }
     }
     
-    @IBInspectable public var trackColor: UIColor = .black {
+    public var trackColor: UIColor = .black {
         didSet {
             progressLayer.trackColor = trackColor
             progressLayer.setNeedsDisplay()
         }
     }
     
-    @IBInspectable public var progressInsideFillColor: UIColor? = nil {
+    public var progressInsideFillColor: UIColor? = nil {
         didSet {
             progressLayer.progressInsideFillColor = progressInsideFillColor ?? .clear
         }
@@ -118,9 +117,9 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
     
     //These are used only from the Interface-Builder. Changing these from code will have no effect.
     //Also IB colors are limited to 3, whereas programatically we can have an arbitrary number of them.
-    @objc @IBInspectable private var IBColor1: UIColor?
-    @objc @IBInspectable private var IBColor2: UIColor?
-    @objc @IBInspectable private var IBColor3: UIColor?
+    @objc private var IBColor1: UIColor?
+    @objc private var IBColor2: UIColor?
+    @objc private var IBColor3: UIColor?
     
     private var animationCompletionBlock: ((Bool) -> Void)?
     
